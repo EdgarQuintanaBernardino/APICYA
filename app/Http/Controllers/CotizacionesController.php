@@ -106,7 +106,7 @@ return response()->json(['data'=>$data,"message"=>"success","code"=>200]);
         $user->email=$request->email;
         $user->apell=$request->apellido;
         $user->acceso=2;
-        $user->email_registro="API";
+        $user->email_registro=$request->email;
         $user->tel_mov=$request->tel_movil;
         $user->password = bcrypt($claveinicial);
         $user->asignado_us="API";
