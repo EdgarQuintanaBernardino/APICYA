@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Traits\Verifytoken;
 use App\Models\carmados;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\DB;
 
 class CotizacionesController extends Controller
 {
@@ -114,7 +115,11 @@ return response()->json(['data'=>$data,"message"=>"success","code"=>200]);
         $user->created_at_us= date('Y-m-d H:i:s');
 
         $user->save();
-
+            DB::table('model_has_roles')->insert([
+                'role_id' => '2',
+                'model_type' => 'App\User',
+                'model_id'=>$user->id
+            ]);
                 return response()->json(['data'=>[],"message"=>"usuario regristrado con éxito","code"=>201]);
          }else{
 
