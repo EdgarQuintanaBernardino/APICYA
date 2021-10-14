@@ -20,7 +20,7 @@ Route::post('login', 'App\Http\Controllers\UserController@authenticate');
 
 Route::group(['middleware' => 'api'], function ($router) {
 
-    Route::post('pruebas','App\Http\Controllers\CotizacionesController@index');
+    Route::post('query','App\Http\Controllers\CotizacionesController@index');
 
 
 });
