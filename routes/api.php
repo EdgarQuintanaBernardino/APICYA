@@ -20,7 +20,8 @@ Route::post('login', 'App\Http\Controllers\UserController@authenticate');
 
 Route::group(['middleware' => 'api'], function ($router) {
 
-    Route::post('cyaapi','App\Http\Controllers\CotizacionesController@index');
+    Route::post('cyaquery','App\Http\Controllers\CotizacionesController@index');
+    Route::post('cyaadd','App\Http\Controllers\CotizacionesController@create');
 
 
 });

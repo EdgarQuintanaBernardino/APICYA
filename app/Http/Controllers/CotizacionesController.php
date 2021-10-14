@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\cotizaciones;
 use Illuminate\Http\Request;
 use App\Models\User;
-//use App\Traits\Verifytoken;
+use App\Traits\Verifytoken;
 use App\Models\carmados;
 
 class CotizacionesController extends Controller
 {
-  //  use Verifytoken;
+    use Verifytoken;
     /**
      * Display a listing of the resource.
      *
@@ -75,64 +75,39 @@ class CotizacionesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'email' => 'required|email|unique:users,email,'.$request->email,
+            'nombre'=>'required',
+            'apellido'=>'required',
+            'tel_mov'=>'required',
+            'token'=>'required'
+        ]);
+      //  return $request;
+         if($this->verifica($request->token)){
+
+           // return "si es valido";
+        $claveinicial="CanastasYArcones";
+        $user= new User();
+        $user->nom=$request->nombre;
+        $user->email=$request->email;
+        $user->apell=$request->apellido;
+        $user->acceso=2;
+        $user->email_registro="API";
+        $user->tel_mov=$request->tel_movil;
+        $user->password = bcrypt($claveinicial);
+        $user->save();
+
+                return response()->json(['data'=>[],"message"=>"usuario regristrado con éxito","code"=>201]);
+         }else{
+
+            return response()->json(['data'=>[],"message"=>"token invalido","code"=>403]);
+
+         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\cotizaciones  $cotizaciones
-     * @return \Illuminate\Http\Response
-     */
-    public function show(cotizaciones $cotizaciones)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\cotizaciones  $cotizaciones
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(cotizaciones $cotizaciones)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\cotizaciones  $cotizaciones
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, cotizaciones $cotizaciones)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\cotizaciones  $cotizaciones
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(cotizaciones $cotizaciones)
-    {
-        //
-    }
 }
