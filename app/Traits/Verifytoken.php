@@ -4,17 +4,6 @@
 *   my traits.php
 */
 namespace App\Traits;
-use App\Models\User;
-use App\Models\sistema;
-use App\Models\permisos_user;
-use App\Models\empresa;
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\Builder;
-use Tymon\JWTAuth\Facades\JWTAuth;
-
 
 trait Verifytoken{
 

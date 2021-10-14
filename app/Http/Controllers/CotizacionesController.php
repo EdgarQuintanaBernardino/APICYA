@@ -18,6 +18,7 @@ class CotizacionesController extends Controller
      */
     public function index(Request $request)
     {
+        return $request;
 
         $data=[];
        // $data[]
